@@ -63,10 +63,10 @@ db.estetica.find() - verificar se a importação correu bem
 
 1.3
 
-Para executar basta estar na pasta API fazer "npm i", seguido de "npm start".
+Para executar basta estar na pasta ex1 fazer "npm i", seguido de "npm start".
 
 
 Exercício 2
 
-Para executar a interface é necessário ter a API a correr, estar na pasta Interface
+Para executar a interface é necessário ter a API a correr, estar na pasta ex2
 e depois executar "npm i", e de seguida "npm start".

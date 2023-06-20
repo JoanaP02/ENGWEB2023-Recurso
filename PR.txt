@@ -1,0 +1,72 @@
+
+Exercicio 1
+
+1.1- 
+O dataset foi alterado manualmente retirando a string "intercencoes" de modo a deixar apenas a lista das mesmas.
+
+Importou-se a base de dados usando o comando:
+mongoimport -d estetica -c consultas --file dataset_operacoes_estetica.json --jsonArray
+
+mongosh
+use estetica
+db.estetica.find() - verificar se a importação correu bem
+
+1.2
+
+1- db.consultas.count() : 5000
+
+2- db.users.find({ idade: { $gt: 80 } }).count() : 1126
+
+3- db.consultas.aggregate([{$group: {_id:"$sexo", count: {$sum: 1}}}])
+[
+  { _id: 'Masculino', count: 1642 },
+  { _id: 'Outro', count: 1706 },
+  { _id: 'Feminino', count: 1652 }
+]
+
+4- db.consultas.aggregate([ {$unwind: "$operacoes"},{$group: {_id: "$operacoes.nome",count: { $sum: 1 }}}])
+[
+  { _id: 'Peeling químico', count: 1245 },
+  { _id: 'Tratamento de celulite', count: 1216 },
+  { _id: 'Tratamento de estrias', count: 1202 },
+  { _id: 'Depilação a cera', count: 1303 },
+  { _id: 'Depilação a laser', count: 1224 },
+  { _id: 'Tratamento de rugas', count: 1227 },
+  { _id: 'Microdermoabrasão', count: 1195 },
+  { _id: 'Tratamento de gordura localizada', count: 1228 },
+  { _id: 'Maquilhagem profissional', count: 1218 },
+  { _id: 'Lifting facial', count: 1196 },
+  { _id: 'Tratamento de manchas na pele', count: 1271 },
+  { _id: 'Massagem relaxante', count: 1250 },
+  { _id: 'Limpeza de pele', count: 1308 },
+  { _id: 'Manicure e pedicure', count: 1245 },
+  { _id: 'Preenchimento facial', count: 1226 },
+  { _id: 'Tratamento de acne', count: 1276 },
+  { _id: 'Toxina botulínica (Botox)', count: 1229 },
+  { _id: 'Tratamento facial com máscara', count: 1230 }
+]
+
+5- db.consultas.aggregate([{$project: {ano: { $year: { $dateFromString: { dateString: "$data" } } },nr_operacoes: 1}},{$group: {_id: "$ano",total_consultas: { $sum: "$nr_operacoes" }}}])
+[
+  { _id: 2021, total_consultas: 2819 },
+  { _id: 2023, total_consultas: 1234 },
+  { _id: 2015, total_consultas: 2585 },
+  { _id: 2016, total_consultas: 2550 },
+  { _id: 2022, total_consultas: 2514 },
+  { _id: 2020, total_consultas: 2631 },
+  { _id: 2018, total_consultas: 2531 },
+  { _id: 2017, total_consultas: 2789 },
+  { _id: 2019, total_consultas: 2636 }
+]
+
+
+
+1.3
+
+Para executar basta estar na pasta API fazer "npm i", seguido de "npm start".
+
+
+Exercício 2
+
+Para executar a interface é necessário ter a API a correr, estar na pasta Interface
+e depois executar "npm i", e de seguida "npm start".
